@@ -120,7 +120,7 @@ class FixedPlugin extends Component {
                   />
                   <span
                     className={
-                      this.props.bgColor === "purple"
+                      this.props.bgColor === "indigo"
                         ? "badge filter badge-purple active"
                         : "badge filter badge-purple"
                     }

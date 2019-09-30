@@ -1,0 +1,128 @@
+body {
+  background-color: #fdeeee;
+}
+
+.box-core {
+  border: 1px ridge #ec26b1;
+  border-radius: 15px;
+  height: 400px;
+  width: 50vmax;
+  margin-left: 23vmax;
+  margin-top: 10vmin;
+  box-shadow: 5px 5px 10px #c386c97c;
+}
+
+.title {
+  text-align: center;
+  margin-left: 50px;
+}
+
+.email-input {
+  padding: 2vmax;
+}
+
+.btn-login {
+  background-color: #5f205f;
+  border: none;
+  padding: 10px 60px;
+  position: absolute;
+  overflow: hidden;
+  color: #ccd5e2;
+  font-size: 16px;
+}
+
+.btn-login:hover {
+  background-color: #7e397e;
+  border: none;
+  padding: 10px 60px;
+  position: absolute;
+  overflow: hidden;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+.btn-login:before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  width: 50%;
+  background: rgba(179, 94, 190, 0.253);
+}
+
+button span:nth-child(1) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #5f205f, #cac1ca);
+  animation: animate1 2s linear infinite;
+  animation-delay: 0.2s;
+}
+@keyframes animate1 {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+button span:nth-child(2) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, #5f205f, #cac1ca);
+  animation: animate2 2s linear infinite;
+  animation-delay: 1.2s;
+}
+@keyframes animate2 {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+button span:nth-child(3) {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to left, #5f205f, #cac1ca);
+  animation: animate3 2s linear infinite;
+  animation-delay: 2.3s;
+}
+@keyframes animate3 {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+button span:nth-child(4) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to top, #5f205f, #cac1ca);
+  animation: animate4 2s linear infinite;
+  animation-delay: 3.3s;
+}
+@keyframes animate4 {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}

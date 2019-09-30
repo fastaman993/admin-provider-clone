@@ -53,9 +53,9 @@ class Dashboard extends Component {
           <Row>
             <Col lg={3} sm={6}>
               <StatsCard
-                bigIcon={<i className="pe-7s-server text-warning" />}
-                statsText="Capacity"
-                statsValue="105GB"
+                bigIcon={<i className="pe-7s-users text-light" />}
+                statsText="Users"
+                statsValue="1200"
                 statsIcon={<i className="fa fa-refresh" />}
                 statsIconText="Updated now"
               />
@@ -63,7 +63,7 @@ class Dashboard extends Component {
             <Col lg={3} sm={6}>
               <StatsCard
                 bigIcon={<i className="pe-7s-wallet text-success" />}
-                statsText="Revenue"
+                statsText="Transaction"
                 statsValue="$1,345"
                 statsIcon={<i className="fa fa-calendar-o" />}
                 statsIconText="Last day"
@@ -92,7 +92,7 @@ class Dashboard extends Component {
             <Col md>
               <Card
                 id="chartActivity"
-                title="2014 Sales"
+                title="2019 Sales"
                 category="All Kondom products including Vagina"
                 stats="Data information certified"
                 statsIcon="fa fa-check"

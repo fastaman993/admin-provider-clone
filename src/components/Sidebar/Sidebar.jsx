@@ -47,12 +47,13 @@ class Sidebar extends Component {
       <div
         id="sidebar"
         className="sidebar"
-        data-color={this.props.color}
-        data-image={this.props.image}
+        // data-color="purple"
+        // style={{ backgroundColor: "purple" }}
+        // data-image={this.props.image}
       >
-        {this.props.hasImage ? (
+        {/* {this.props.hasImage ? (
           <div className="sidebar-background" style={sidebarBackground} />
-        ) : null}
+        ) : null} */}
         <div className="logo">
           <a
             href="https://www.creative-tim.com?ref=lbd-sidebar"
