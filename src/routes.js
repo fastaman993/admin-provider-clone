@@ -25,7 +25,7 @@ import Notifications from "views/Notifications.jsx";
 import Upgrade from "views/Upgrade.jsx";
 import Login from "views/Login";
 import Prodacts from "views/Prodacts";
-import Item from "views/subCategory";
+import Item from "views/Item";
 import Tes from "views/tes";
 
 const dashboardRoutes = [

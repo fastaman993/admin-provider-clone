@@ -51,7 +51,7 @@ body {
   background: rgba(179, 94, 190, 0.253);
 }
 
-button span:nth-child(1) {
+.loginz:nth-child(1) {
   position: absolute;
   top: 0;
   left: 0;
@@ -70,7 +70,7 @@ button span:nth-child(1) {
   }
 }
 
-button span:nth-child(2) {
+.loginz:nth-child(2) {
   position: absolute;
   top: 0;
   right: 0;
@@ -89,7 +89,7 @@ button span:nth-child(2) {
   }
 }
 
-button span:nth-child(3) {
+.loginz:nth-child(3) {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -108,7 +108,7 @@ button span:nth-child(3) {
   }
 }
 
-button span:nth-child(4) {
+.loginz:nth-child(4) {
   position: absolute;
   top: 0;
   left: 0;

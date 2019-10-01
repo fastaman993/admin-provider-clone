@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const Item = props => {
@@ -8,14 +8,31 @@ const Item = props => {
       <div className="content">
         <Row>
           <Col xs={12}>
-            <div className="numbers">
-              <p style={{ textAlign: "center" }}>{props.name}</p>
+            <div
+              className="numbers"
+              style={{ display: "flex", justifyContent: "space-around" }}
+            >
+              <div>
+                <span style={{ fontSize: "18px" }}>{props.name}</span>
+              </div>
+              <div>
+                <Button
+                  bsStyle="primary"
+                  bsSize="sm"
+                  style={{ marginRight: "10px" }}
+                  onClick={props.opens}
+                >
+                  Edit Prodact
+                </Button>
+                <Button bsStyle="primary" bsSize="sm">
+                  Hapus
+                </Button>
+              </div>
             </div>
           </Col>
         </Row>
         <div className="footer">
           <hr />
-
           <div className="stats" style={{ width: "100%" }}>
             <p>Description : {props.detail}</p>
 
@@ -56,14 +73,6 @@ const Item = props => {
               )}
             </Col>
           </div>
-
-          {/* {this.props.subCategories.map((sub, index) => {
-                  return (
-                    <Link>
-                      <p style={{ color: "#919191" }}>{sub.name}</p>
-                    </Link>
-                  );
-                })} */}
         </div>
       </div>
     </div>

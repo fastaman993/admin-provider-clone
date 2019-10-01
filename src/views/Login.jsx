@@ -28,10 +28,10 @@ class Login extends Component {
               </FormGroup>
               {/* <Button type="submit">Login</Button> */}
               <button className="btn-login">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
+                <span className="loginz"></span>
+                <span className="loginz"></span>
+                <span className="loginz"></span>
+                <span className="loginz"></span>
                 Login
               </button>
             </div>

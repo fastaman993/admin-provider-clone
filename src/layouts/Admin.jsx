@@ -37,47 +37,48 @@ class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      _notificationSystem: null,
-      image: image,
-      color: "white",
-      hasImage: true,
+      // _notificationSystem: null,
+      // image: image,
+      // color: "white",
+      // hasImage: true,
       category: [],
       loadings: true
       // fixedClasses: "dropdown show-dropdown open"
     };
   }
-  handleNotificationClick = position => {
-    let color = Math.floor(Math.random() * 4 + 1);
-    let level;
-    switch (color) {
-      case 1:
-        level = "success";
-        break;
-      case 2:
-        level = "warning";
-        break;
-      case 3:
-        level = "error";
-        break;
-      case 4:
-        level = "info";
-        break;
-      default:
-        break;
-    }
-    this.state._notificationSystem.addNotification({
-      title: <span data-notify="icon" className="pe-7s-gift" />,
-      message: (
-        <div>
-          Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for
-          every web developer.
-        </div>
-      ),
-      level: level,
-      position: position,
-      autoDismiss: 15
-    });
-  };
+  // handleNotificationClick = position => {
+  //   let color = Math.floor(Math.random() * 4 + 1);
+  //   let level;
+  //   switch (color) {
+  //     case 1:
+  //       level = "success";
+  //       break;
+  //     case 2:
+  //       level = "warning";
+  //       break;
+  //     case 3:
+  //       level = "error";
+  //       break;
+  //     case 4:
+  //       level = "info";
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  //   this.state._notificationSystem.addNotification({
+  //     title: <span data-notify="icon" className="pe-7s-gift" />,
+  //     message: (
+  //       <div>
+  //         Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for
+  //         every web developer.
+  //       </div>
+  //     ),
+  //     level: level,
+  //     position: position,
+  //     autoDismiss: 15
+  //   });
+  // };
+
   getRoutes = routes => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin" || prop.layout === "/page") {
@@ -138,37 +139,37 @@ class Admin extends Component {
       category: this.props.category.rows,
       _notificationSystem: this.refs.notificationSystem
     });
-    let _notificationSystem = this.refs.notificationSystem;
-    let color = Math.floor(Math.random() * 4 + 1);
-    let level;
-    switch (color) {
-      case 1:
-        level = "success";
-        break;
-      case 2:
-        level = "warning";
-        break;
-      case 3:
-        level = "error";
-        break;
-      case 4:
-        level = "info";
-        break;
-      default:
-        break;
-    }
-    _notificationSystem.addNotification({
-      title: <span data-notify="icon" className="pe-7s-gift" />,
-      message: (
-        <div>
-          Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for
-          every web developer.
-        </div>
-      ),
-      level: level,
-      position: "tr",
-      autoDismiss: 15
-    });
+    // let _notificationSystem = this.refs.notificationSystem;
+    // let color = Math.floor(Math.random() * 4 + 1);
+    // let level;
+    // switch (color) {
+    //   case 1:
+    //     level = "success";
+    //     break;
+    //   case 2:
+    //     level = "warning";
+    //     break;
+    //   case 3:
+    //     level = "error";
+    //     break;
+    //   case 4:
+    //     level = "info";
+    //     break;
+    //   default:
+    //     break;
+    // }
+    // _notificationSystem.addNotification({
+    //   title: <span data-notify="icon" className="pe-7s-gift" />,
+    //   message: (
+    //     <div>
+    //       Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for
+    //       every web developer.
+    //     </div>
+    //   ),
+    //   level: level,
+    //   position: "tr",
+    //   autoDismiss: 15
+    // });
   };
   componentDidUpdate(e) {
     if (
@@ -184,9 +185,8 @@ class Admin extends Component {
       this.refs.mainPanel.scrollTop = 0;
     }
   }
-  render() {
-    console.log(this.state.loading);
 
+  render() {
     return (
       <div className="wrapper">
         <NotificationSystem ref="notificationSystem" style={style} />
