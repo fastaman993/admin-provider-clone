@@ -18,15 +18,18 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import NotificationSystem from "react-notification-system";
+import { connect } from "react-redux";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
+import Load from "../components/Loading/loading";
 
 import { style } from "variables/Variables.jsx";
 
 import routes from "routes.js";
+import { getCategory } from "../publics/redux/action/Category";
 
 import image from "assets/img/sidebar-3.jpg";
 
@@ -38,12 +41,14 @@ class Admin extends Component {
       image: image,
       color: "white",
       hasImage: true,
-      fixedClasses: "dropdown show-dropdown open"
+      category: [],
+      loadings: true
+      // fixedClasses: "dropdown show-dropdown open"
     };
   }
   handleNotificationClick = position => {
-    var color = Math.floor(Math.random() * 4 + 1);
-    var level;
+    let color = Math.floor(Math.random() * 4 + 1);
+    let level;
     switch (color) {
       case 1:
         level = "success";
@@ -75,7 +80,9 @@ class Admin extends Component {
   };
   getRoutes = routes => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/admin" || prop.layout === "/page") {
+        console.log("nooooooo");
+
         return (
           <Route
             path={prop.layout + prop.path}
@@ -83,6 +90,7 @@ class Admin extends Component {
               <prop.component
                 {...props}
                 handleClick={this.handleNotificationClick}
+                category={this.state.category}
               />
             )}
             key={key}
@@ -93,6 +101,7 @@ class Admin extends Component {
       }
     });
   };
+
   getBrandText = path => {
     for (let i = 0; i < routes.length; i++) {
       if (
@@ -105,27 +114,33 @@ class Admin extends Component {
     }
     return "Brand";
   };
-  handleImageClick = image => {
-    this.setState({ image: image });
-  };
-  handleColorClick = color => {
-    this.setState({ color: color });
-  };
-  handleHasImage = hasImage => {
-    this.setState({ hasImage: hasImage });
-  };
-  handleFixedClick = () => {
-    if (this.state.fixedClasses === "dropdown") {
-      this.setState({ fixedClasses: "dropdown show-dropdown open" });
-    } else {
-      this.setState({ fixedClasses: "dropdown" });
-    }
-  };
-  componentDidMount() {
-    this.setState({ _notificationSystem: this.refs.notificationSystem });
-    var _notificationSystem = this.refs.notificationSystem;
-    var color = Math.floor(Math.random() * 4 + 1);
-    var level;
+  // handleImageClick = image => {
+  //   this.setState({ image: image });
+  // };
+  // handleColorClick = color => {
+  //   this.setState({ color: color });
+  // };
+  // handleHasImage = hasImage => {
+  //   this.setState({ hasImage: hasImage });
+  // };
+  // handleFixedClick = () => {
+  //   if (this.state.fixedClasses === "dropdown") {
+  //     this.setState({ fixedClasses: "dropdown show-dropdown open" });
+  //   } else {
+  //     this.setState({ fixedClasses: "dropdown" });
+  //   }
+  // };
+  componentDidMount = async () => {
+    await this.props.dispatch(getCategory());
+
+    this.setState({
+      loadings: this.props.loading,
+      category: this.props.category.rows,
+      _notificationSystem: this.refs.notificationSystem
+    });
+    let _notificationSystem = this.refs.notificationSystem;
+    let color = Math.floor(Math.random() * 4 + 1);
+    let level;
     switch (color) {
       case 1:
         level = "success";
@@ -154,7 +169,7 @@ class Admin extends Component {
       position: "tr",
       autoDismiss: 15
     });
-  }
+  };
   componentDidUpdate(e) {
     if (
       window.innerWidth < 993 &&
@@ -170,22 +185,24 @@ class Admin extends Component {
     }
   }
   render() {
+    console.log(this.state.loading);
+
     return (
       <div className="wrapper">
         <NotificationSystem ref="notificationSystem" style={style} />
-        <Sidebar
-          {...this.props}
-          routes={routes}
-          image={this.state.image}
-          // color={this.state.color}
-          hasImage={this.state.hasImage}
-        />
+        <Sidebar {...this.props} routes={routes} />
         <div id="main-panel" className="main-panel" ref="mainPanel">
           <AdminNavbar
             {...this.props}
             brandText={this.getBrandText(this.props.location.pathname)}
           />
-          <Switch>{this.getRoutes(routes)}</Switch>
+          {this.state.loadings ? (
+            <div style={{ marginTop: "50%" }}>
+              <Load />
+            </div>
+          ) : (
+            <Switch>{this.getRoutes(routes)}</Switch>
+          )}
           <Footer />
           {/* <FixedPlugin
             handleImageClick={this.handleImageClick}
@@ -203,4 +220,11 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+const mapStateToProps = state => {
+  return {
+    category: state.Category.category.response,
+    loading: state.Category.isLoading
+  };
+};
+
+export default connect(mapStateToProps)(Admin);

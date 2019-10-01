@@ -24,6 +24,9 @@ import Maps from "views/Maps.jsx";
 import Notifications from "views/Notifications.jsx";
 import Upgrade from "views/Upgrade.jsx";
 import Login from "views/Login";
+import Prodacts from "views/Prodacts";
+import Item from "views/subCategory";
+import Tes from "views/tes";
 
 const dashboardRoutes = [
   {
@@ -54,20 +57,42 @@ const dashboardRoutes = [
     component: Login,
     layout: "/login"
   },
-  // {
-  //   path: "/typography",
-  //   name: "Typography",
-  //   icon: "pe-7s-news-paper",
-  //   component: Typography,
-  //   layout: "/admin"
-  // },
+  {
+    path: "/typography",
+    name: "Typography",
+    icon: "pe-7s-news-paper",
+    component: Typography,
+    layout: "/admin"
+  },
   {
     path: "/icons",
     name: "Icons",
     icon: "pe-7s-science",
     component: Icons,
     layout: "/admin"
-  }
+  },
+  {
+    path: "/prodacts",
+    name: "Prodacts",
+    icon: "pe-7s-shopbag",
+    component: Prodacts,
+    layout: "/admin"
+  },
+  {
+    path: "/tes",
+    name: "Prodacts",
+    icon: "pe-7s-shopbag",
+    component: Tes,
+    layout: "/admin"
+  },
+  {
+    path: "/item/:id",
+    name: "Prodacts Item",
+    icon: "pe-7s-shopbag",
+    component: Item,
+    layout: "/page"
+  },
+
   // {
   //   path: "/maps",
   //   name: "Maps",
@@ -75,15 +100,15 @@ const dashboardRoutes = [
   //   component: Maps,
   //   layout: "/admin"
   // },
+  {
+    path: "/notifications",
+    name: "Notifications",
+    icon: "pe-7s-bell",
+    component: Notifications,
+    layout: "/admin"
+  }
   // {
-  //   path: "/notifications",
-  //   name: "Notifications",
-  //   icon: "pe-7s-bell",
-  //   component: Notifications,
-  //   layout: "/admin"
-  // },
-  // {
-  //   upgrade: true,
+  //   upgrade: true
   //   path: "/upgrade",
   //   name: "Upgrade to PRO",
   //   icon: "pe-7s-rocket",
