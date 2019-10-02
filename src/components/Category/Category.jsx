@@ -1,8 +1,41 @@
 import React, { Component } from "react";
-import { Row, Col, Button } from "react-bootstrap";
+import { Row, Col, Button, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import {
+  deleteSubCategory,
+  editSubCategory
+} from "../../publics/redux/action/subCategory";
+import { connect } from "react-redux";
+import Modal from "../Modal/modalEditSub";
 
 class Category extends Component {
+  constructor(props) {
+    super();
+    this.state = {
+      modal: false
+    };
+    this.handleClose = this.handleClose.bind(this);
+    this.handleOpen = this.handleOpen.bind(this);
+  }
+  state = {
+    modal: false
+  };
+  delete = paramId => {
+    this.props.dispatch(deleteSubCategory(paramId)).then(() => {
+      window.location.reload();
+    });
+  };
+  handleOpen() {
+    this.setState({ modal: true });
+  }
+
+  handleClose() {
+    this.setState({ modal: false });
+  }
+  handleSubmit = param => {
+    this.props.dispatch(editSubCategory(param));
+    this.setState({ modal: false });
+  };
   render() {
     return (
       <div className="card card-stats">
@@ -17,15 +50,39 @@ class Category extends Component {
           <Row>
             <Col style={{ padding: "10px" }}>
               <div className="footer">
-                <hr />
-                <div className="stats">
+                <div className="stats" style={{ width: "100%" }}>
                   {this.props.subCategories !== undefined ? (
                     this.props.subCategories.length > 0 ? (
                       this.props.subCategories.map((sub, index) => {
                         return (
-                          <Link to={`/page/item/${sub.id}`}>
-                            <p style={{ color: "#919191" }}>{sub.name}</p>
-                          </Link>
+                          <>
+                            <Table striped hover>
+                              <tbody>
+                                <tr>
+                                  <td style={{ textAlign: "left" }}>
+                                    <Link to={`/page/item/${sub.id}`}>
+                                      <p style={{ color: "#919191" }}>
+                                        {sub.name}
+                                      </p>
+                                    </Link>
+                                  </td>
+
+                                  <td style={{ textAlign: "right" }}>
+                                    <span
+                                      onClick={() => this.delete(sub.id)}
+                                      style={{
+                                        marginRight: "10px",
+                                        color: "red"
+                                      }}
+                                    >
+                                      Hapus
+                                    </span>
+                                    <span onClick={this.handleOpen}>Edit</span>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </Table>
+                          </>
                         );
                       })
                     ) : (
@@ -36,54 +93,36 @@ class Category extends Component {
                           textAlign: "center"
                         }}
                       >
-                        <Button bsStyle="success" onClick={this.props.open}>
-                          {" "}
-                          Add Item
-                        </Button>
+                        <p>Data Belum Ada</p>
                       </div>
                     )
                   ) : (
-                    <Button bsStyle="success" onClick={this.props.open}>
-                      Add Item
-                    </Button>
+                    <p>Data Belum Ada</p>
                   )}
-                  {/* {this.props.subCategories.length > 0 ? (
-                    this.props.subCategories.map((sub, index) => {
-                      return (
-                        <Link to={`/page/item/${sub.id}`}>
-                          <p style={{ color: "#919191" }}>{sub.name}</p>
-                        </Link>
-                      );
-                    })
-                  ) : (
-                    <div
-                      style={{
-                        alignItems: "center",
-                        justifyContent: "center",
-                        textAlign: "center"
-                      }}
-                    >
-                      <Button bsStyle="success" onClick={this.props.open}>
-                        {" "}
-                        Add Item
-                      </Button>
-                    </div>
-                  )} */}
-                  {/* // {this.props.subCategories.map((sub, index) => {
-              //   return (
-              //     <Link to={`/page/item/${sub.id}`}>
-              //       <p style={{ color: "#919191" }}>{sub.name}</p>
-              //     </Link>
-              //   );
-              // })} */}
+
+                  <Button
+                    bsStyle="danger"
+                    style={{ margin: "10px" }}
+                    bsSize="small"
+                    onClick={() => this.props.deleteCategory(this.props.id)}
+                  >
+                    Delete
+                  </Button>
                 </div>
               </div>
             </Col>
           </Row>
         </div>
+        <Modal
+          status={this.state.modal}
+          show={this.handleOpen}
+          close={this.handleClose}
+          // forms={this.handleForm}
+          // post={this.handleSubmit}
+        />
       </div>
     );
   }
 }
 
-export default Category;
+export default connect()(Category);

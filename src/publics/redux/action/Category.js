@@ -34,3 +34,11 @@ export const postCategory = params => {
     )
   };
 };
+export const deleteCategory = params => {
+  return {
+    type: "DELETE_CATEGORY",
+    payload: Axios.delete(
+      `https://mobile-provider-clone.herokuapp.com/category/${params}`
+    )
+  };
+};

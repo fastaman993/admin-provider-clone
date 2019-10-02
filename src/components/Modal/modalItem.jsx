@@ -8,7 +8,16 @@ import {
 } from "react-bootstrap";
 
 class ModalItem extends Component {
+  state = {
+    tmpData: { CategoryId: "", name: "" }
+  };
+  handleForm = event => {
+    let tmpData = { ...this.state.tmpData };
+    tmpData[event.target.name] = event.target.value;
+    this.setState({ tmpData });
+  };
   render() {
+    console.log(this.state.tmpData);
     return (
       <Fragment>
         <Modal show={this.props.status} onHide={this.props.close}>
@@ -16,17 +25,33 @@ class ModalItem extends Component {
             <Modal.Title>Add Item</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ControlLabel>Category</ControlLabel>
+            <ControlLabel>Pilih Category</ControlLabel>
+            <FormControl
+              componentClass="select"
+              placeholder="select"
+              name="CategoryId"
+              onChange={this.handleForm}
+            >
+              {this.props.data.map((dat, index) => (
+                <option key={index} value={dat.id}>
+                  {dat.name}
+                </option>
+              ))}
+              {/* <option value="other">...</option> */}
+            </FormControl>
+
+            <ControlLabel>Name Product</ControlLabel>
             <FormControl
               type="text"
+              name="name"
               placeholder="type in here boss"
-              disabled="true"
+              onChange={this.handleForm}
             />
-            <ControlLabel>Name Product</ControlLabel>
-            <FormControl type="text" placeholder="type in here boss" />
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.props.close}>Input</Button>
+            <Button onClick={() => this.props.post(this.state.tmpData)}>
+              Input
+            </Button>
           </Modal.Footer>
         </Modal>
       </Fragment>

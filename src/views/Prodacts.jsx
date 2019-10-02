@@ -4,7 +4,8 @@ import { Grid, Row, Col } from "react-bootstrap";
 import Button from "components/CustomButton/CustomButton";
 import ModalCategory from "../components/Modal/modalCategory";
 import ModalItem from "../components/Modal/modalItem";
-import { postCategory } from "../publics/redux/action/Category";
+import { postCategory, deleteCategory } from "../publics/redux/action/Category";
+import { postSubCategory } from "../publics/redux/action/subCategory";
 import { connect } from "react-redux";
 
 class Prodacts extends Component {
@@ -12,8 +13,7 @@ class Prodacts extends Component {
     super(props);
     this.state = {
       modalCategory: false,
-      modalItem: false,
-      data: []
+      modalItem: false
     };
     this.handleShowC = this.handleShowC.bind(this);
     this.handleCloseC = this.handleCloseC.bind(this);
@@ -38,8 +38,24 @@ class Prodacts extends Component {
   handleSubmit = param => {
     this.props.dispatch(postCategory(param));
     this.setState({ modalCategory: false });
-    console.log(param);
-    console.log("asasd");
+  };
+
+  handleSubmititem = param => {
+    this.props
+      .dispatch(postSubCategory(param))
+      .then(() => {
+        this.setState({ modalItem: false });
+        window.location.reload();
+      })
+      .catch(err => console.log(err));
+  };
+  delete = param => {
+    this.props
+      .dispatch(deleteCategory(param))
+      .then(() => {
+        window.location.reload();
+      })
+      .catch(err => console.log(err));
   };
   render() {
     return (
@@ -48,14 +64,32 @@ class Prodacts extends Component {
           <Button bsStyle="primary" onClick={this.handleShowC}>
             Add Product
           </Button>
+          <Button
+            bsStyle="success"
+            onClick={this.handleShowI}
+            style={{ marginLeft: "10px" }}
+          >
+            Add Item
+          </Button>
         </div>
         {/* <h1>Hello Wold</h1> */}
         <Grid fluid>
-          <Row style={{ marginTop: "50px" }}>
+          <Row
+            style={{
+              marginTop: "50px",
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
             {this.props.category.map((cat, index) => {
               return (
-                <Col lg={5} sm={3}>
-                  <Category name={cat.name} subCategories={cat.SubCategories} />
+                <Col lg={8} sm={3}>
+                  <Category
+                    name={cat.name}
+                    id={cat.id}
+                    subCategories={cat.SubCategories}
+                    deleteCategory={this.delete}
+                  />
                 </Col>
               );
             })}
@@ -68,10 +102,13 @@ class Prodacts extends Component {
           forms={this.handleForm}
           post={this.handleSubmit}
         />
+
         <ModalItem
           status={this.state.modalItem}
           show={this.handleShowI}
           close={this.handleCloseI}
+          data={this.props.categorys.rows}
+          post={this.handleSubmititem}
         />
       </Fragment>
     );
