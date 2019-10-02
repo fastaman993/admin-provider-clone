@@ -1,44 +1,26 @@
-/*!
-
-=========================================================
-* Light Bootstrap Dashboard React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React, { Component } from "react";
 import { Grid, Row, Col, Table, Button } from "react-bootstrap";
 import Loading from "../components/Loading/loading";
 import Card from "components/Card/Card.jsx";
-import { thArray, tdArray } from "variables/Variables.jsx";
-import { getUser } from "../publics/redux/action/user";
+import { getTransaction } from "../publics/redux/action/Transaction";
 import { connect } from "react-redux";
 
 class TableList extends Component {
   state = {
-    users: [],
+    transaction: [],
     loading: true,
     reject: false
   };
   componentDidMount = async () => {
-    await this.props.dispatch(getUser());
+    await this.props.dispatch(getTransaction());
     this.setState({
-      users: this.props.users,
+      transaction: this.props.transaction.rows,
       loading: this.props.loading,
       reject: this.props.reject
     });
   };
   render() {
-    console.log(this.state.users);
+    console.log(this.state.transaction);
 
     return (
       <div className="content">
@@ -46,7 +28,7 @@ class TableList extends Component {
           <div style={{ marginTop: "50%" }}>
             <Loading />
           </div>
-        ) : this.state.users.users.length > 0 ? (
+        ) : this.state.transaction ? (
           <Grid fluid>
             <Row>
               <Col md={12}>
@@ -67,7 +49,7 @@ class TableList extends Component {
                       </thead>
                       <tbody>
                         <tr>
-                          {this.state.users.users.map((user, index) => {
+                          {this.state.transaction.map((user, index) => {
                             return (
                               <>
                                 <td key={index}>{user.name}</td>
@@ -91,38 +73,6 @@ class TableList extends Component {
                   }
                 />
               </Col>
-
-              {/* <Col md={12}>
-                <Card
-                  plain
-                  title="Striped Table with Hover"
-                  category="Here is a subtitle for this table"
-                  ctTableFullWidth
-                  ctTableResponsive
-                  content={
-                    <Table hover>
-                      <thead>
-                        <tr>
-                          {thArray.map((prop, key) => {
-                            return <th key={key}>{prop}</th>;
-                          })}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {tdArray.map((prop, key) => {
-                          return (
-                            <tr key={key}>
-                              {prop.map((prop, key) => {
-                                return <td key={key}>{prop}</td>;
-                              })}
-                            </tr>
-                          );
-                        })}
-                      </tbody>
-                    </Table>
-                  }
-                />
-              </Col> */}
             </Row>
           </Grid>
         ) : (
@@ -164,9 +114,9 @@ class TableList extends Component {
 }
 const mapStateToProps = state => {
   return {
-    users: state.Users,
-    loading: state.Users.isLoading,
-    reject: state.Users.isRejected
+    transaction: state.Transaction.transaction,
+    loading: state.Transaction.isLoading,
+    reject: state.Transaction.isRejected
   };
 };
 export default connect(mapStateToProps)(TableList);

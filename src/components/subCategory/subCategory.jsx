@@ -25,7 +25,7 @@ const Item = props => {
                   Edit Prodact
                 </Button>
                 <Button
-                  bsStyle="primary"
+                  bsStyle="danger"
                   bsSize="sm"
                   onClick={() => props.hapus(props.idNya)}
                 >
@@ -55,7 +55,7 @@ const Item = props => {
             </Col>
             <Col md={6} style={{ marginTop: "10px" }}>
               <p style={{ textAlign: "right" }}>
-                Duration: {props.duration} Days
+                Duration: {props.duration} Hours
               </p>
               <hr />
               {props.discount !== 0 ? (
@@ -66,14 +66,25 @@ const Item = props => {
                       textDecoration: "line-through"
                     }}
                   >
-                    Price : Rp{props.price}
+                    Price : Rp
+                    {props.price.toLocaleString(navigator.language, {
+                      minimumFractionDigits: 0
+                    })}
                   </p>
                   <p style={{ textAlign: "right" }}>
-                    Price : Rp{props.discprice}
+                    Price : Rp
+                    {props.discprice.toLocaleString(navigator.language, {
+                      minimumFractionDigits: 0
+                    })}
                   </p>
                 </>
               ) : (
-                <p style={{ textAlign: "right" }}>Price : Rp{props.price}</p>
+                <p style={{ textAlign: "right" }}>
+                  Price : Rp
+                  {props.price.toLocaleString(navigator.language, {
+                    minimumFractionDigits: 0
+                  })}
+                </p>
               )}
             </Col>
           </div>

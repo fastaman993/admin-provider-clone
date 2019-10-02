@@ -34,6 +34,7 @@ import {
   responsiveBar,
   legendBar
 } from "variables/Variables.jsx";
+import { getUser } from "../publics/redux/action/user";
 
 class Dashboard extends Component {
   createLegend(json) {

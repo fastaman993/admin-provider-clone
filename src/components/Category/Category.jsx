@@ -16,7 +16,7 @@ class Category extends Component {
       <div className="card card-stats">
         <div className="content">
           <Row>
-            <Col xs={7}>
+            <Col md={7}>
               <div className="numbers">
                 <p>{this.props.name}</p>
               </div>
@@ -31,7 +31,7 @@ class Category extends Component {
                       this.props.subCategories.map((sub, index) => {
                         return (
                           <>
-                            <Table striped hover>
+                            <Table hover>
                               <tbody>
                                 <tr>
                                   <td style={{ textAlign: "left" }}>

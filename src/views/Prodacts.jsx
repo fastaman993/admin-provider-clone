@@ -77,7 +77,8 @@ class Prodacts extends Component {
         <Grid fluid>
           <Row
             style={{
-              marginTop: "50px",
+              marginTop: "10px",
+              marginLeft: "22%",
               justifyContent: "center",
               alignItems: "center"
             }}

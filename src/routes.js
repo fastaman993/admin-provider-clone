@@ -26,7 +26,7 @@ import Upgrade from "views/Upgrade.jsx";
 import Login from "views/Login";
 import Prodacts from "views/Prodacts";
 import Item from "views/Item";
-import Tes from "views/tes";
+import History from "views/History";
 
 const dashboardRoutes = [
   {
@@ -80,9 +80,9 @@ const dashboardRoutes = [
   },
   {
     path: "/tes",
-    name: "Prodacts",
-    icon: "pe-7s-shopbag",
-    component: Tes,
+    name: "History",
+    icon: "pe-7s-clock",
+    component: History,
     layout: "/admin"
   },
   {

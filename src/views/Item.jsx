@@ -104,7 +104,7 @@ class Category extends Component {
               </Button>
             </div>
             <Grid fluid>
-              <Row style={{ marginTop: "50px", marginLeft: "10px" }}>
+              <Row style={{ marginTop: "50px" }}>
                 {this.state.products.map((product, index) => {
                   return (
                     <>

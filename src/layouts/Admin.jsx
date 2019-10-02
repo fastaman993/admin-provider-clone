@@ -27,7 +27,6 @@ import FixedPlugin from "components/FixedPlugin/FixedPlugin.jsx";
 import Load from "../components/Loading/loading";
 
 import { style } from "variables/Variables.jsx";
-
 import routes from "routes.js";
 import { getCategory } from "../publics/redux/action/Category";
 
@@ -37,47 +36,11 @@ class Admin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // _notificationSystem: null,
-      // image: image,
-      // color: "white",
-      // hasImage: true,
       category: [],
-      loadings: true
-      // fixedClasses: "dropdown show-dropdown open"
+      loadings: true,
+      rejet: true
     };
   }
-  // handleNotificationClick = position => {
-  //   let color = Math.floor(Math.random() * 4 + 1);
-  //   let level;
-  //   switch (color) {
-  //     case 1:
-  //       level = "success";
-  //       break;
-  //     case 2:
-  //       level = "warning";
-  //       break;
-  //     case 3:
-  //       level = "error";
-  //       break;
-  //     case 4:
-  //       level = "info";
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  //   this.state._notificationSystem.addNotification({
-  //     title: <span data-notify="icon" className="pe-7s-gift" />,
-  //     message: (
-  //       <div>
-  //         Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for
-  //         every web developer.
-  //       </div>
-  //     ),
-  //     level: level,
-  //     position: position,
-  //     autoDismiss: 15
-  //   });
-  // };
 
   getRoutes = routes => {
     return routes.map((prop, key) => {
@@ -115,29 +78,14 @@ class Admin extends Component {
     }
     return "Brand";
   };
-  // handleImageClick = image => {
-  //   this.setState({ image: image });
-  // };
-  // handleColorClick = color => {
-  //   this.setState({ color: color });
-  // };
-  // handleHasImage = hasImage => {
-  //   this.setState({ hasImage: hasImage });
-  // };
-  // handleFixedClick = () => {
-  //   if (this.state.fixedClasses === "dropdown") {
-  //     this.setState({ fixedClasses: "dropdown show-dropdown open" });
-  //   } else {
-  //     this.setState({ fixedClasses: "dropdown" });
-  //   }
-  // };
+
   componentDidMount = async () => {
     await this.props.dispatch(getCategory());
 
     this.setState({
       loadings: this.props.loading,
       category: this.props.category.rows,
-      _notificationSystem: this.refs.notificationSystem
+      rejet: this.props.reject
     });
     // let _notificationSystem = this.refs.notificationSystem;
     // let color = Math.floor(Math.random() * 4 + 1);
@@ -185,8 +133,24 @@ class Admin extends Component {
       this.refs.mainPanel.scrollTop = 0;
     }
   }
+  rejet = () => {
+    let det = (
+      <div
+        style={{
+          marginTop: "20%",
+          marginBottom: "50%",
+          marginLeft: "45%"
+        }}
+      >
+        <span>Conection Time Out</span>
+      </div>
+    );
+    return det;
+  };
 
   render() {
+    console.log(this.props.reject);
+
     return (
       <div className="wrapper">
         <NotificationSystem ref="notificationSystem" style={style} />
@@ -196,6 +160,15 @@ class Admin extends Component {
             {...this.props}
             brandText={this.getBrandText(this.props.location.pathname)}
           />
+          {/* <div
+            style={{
+              marginTop: "20%",
+              marginBottom: "50%",
+              marginLeft: "45%"
+            }}
+          >
+            <span>Conection Time Out</span>
+          </div> */}
           {this.state.loadings ? (
             <div style={{ marginTop: "50%" }}>
               <Load />
@@ -223,7 +196,8 @@ class Admin extends Component {
 const mapStateToProps = state => {
   return {
     category: state.Category.category.response,
-    loading: state.Category.isLoading
+    loading: state.Category.isLoading,
+    reject: state.Category.isRejected
   };
 };
 
