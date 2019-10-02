@@ -1,41 +1,16 @@
 import React, { Component } from "react";
 import { Row, Col, Button, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import {
-  deleteSubCategory,
-  editSubCategory
-} from "../../publics/redux/action/subCategory";
+import { deleteSubCategory } from "../../publics/redux/action/subCategory";
 import { connect } from "react-redux";
-import Modal from "../Modal/modalEditSub";
 
 class Category extends Component {
-  constructor(props) {
-    super();
-    this.state = {
-      modal: false
-    };
-    this.handleClose = this.handleClose.bind(this);
-    this.handleOpen = this.handleOpen.bind(this);
-  }
-  state = {
-    modal: false
-  };
   delete = paramId => {
     this.props.dispatch(deleteSubCategory(paramId)).then(() => {
       window.location.reload();
     });
   };
-  handleOpen() {
-    this.setState({ modal: true });
-  }
 
-  handleClose() {
-    this.setState({ modal: false });
-  }
-  handleSubmit = param => {
-    this.props.dispatch(editSubCategory(param));
-    this.setState({ modal: false });
-  };
   render() {
     return (
       <div className="card card-stats">
@@ -77,7 +52,6 @@ class Category extends Component {
                                     >
                                       Hapus
                                     </span>
-                                    <span onClick={this.handleOpen}>Edit</span>
                                   </td>
                                 </tr>
                               </tbody>
@@ -113,13 +87,6 @@ class Category extends Component {
             </Col>
           </Row>
         </div>
-        <Modal
-          status={this.state.modal}
-          show={this.handleOpen}
-          close={this.handleClose}
-          // forms={this.handleForm}
-          // post={this.handleSubmit}
-        />
       </div>
     );
   }

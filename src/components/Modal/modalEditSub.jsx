@@ -14,19 +14,19 @@ class ModalSubEdit extends Component {
   // };
 
   render() {
-    console.log(this.state.tmpData);
+    console.log(this.props.idNya);
 
     return (
       <Fragment>
         <Modal show={this.props.status} onHide={this.props.close}>
           <Modal.Header closeButton>
-            <Modal.Title>Add Category</Modal.Title>
+            <Modal.Title>Edit Sub Category</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <ControlLabel>Name Category</ControlLabel>
+            <ControlLabel>Name Sub Category</ControlLabel>
             <FormControl
               type="text"
-              placeholder="type in here boss"
+              placeholder={this.props.befores}
               onChange={this.handleForm}
             />
           </Modal.Body>

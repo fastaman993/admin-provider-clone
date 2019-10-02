@@ -7,7 +7,7 @@ const Item = props => {
     <div className="card card-stats" style={{ margin: "20px" }}>
       <div className="content">
         <Row>
-          <Col xs={12}>
+          <Col md={12}>
             <div
               className="numbers"
               style={{ display: "flex", justifyContent: "space-around" }}
@@ -20,11 +20,15 @@ const Item = props => {
                   bsStyle="primary"
                   bsSize="sm"
                   style={{ marginRight: "10px" }}
-                  onClick={props.opens}
+                  onClick={() => props.opens(props.idNya)}
                 >
                   Edit Prodact
                 </Button>
-                <Button bsStyle="primary" bsSize="sm">
+                <Button
+                  bsStyle="primary"
+                  bsSize="sm"
+                  onClick={() => props.hapus(props.idNya)}
+                >
                   Hapus
                 </Button>
               </div>

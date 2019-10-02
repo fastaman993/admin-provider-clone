@@ -13,7 +13,8 @@ class Prodacts extends Component {
     super(props);
     this.state = {
       modalCategory: false,
-      modalItem: false
+      modalItem: false,
+      modalSubCat: false
     };
     this.handleShowC = this.handleShowC.bind(this);
     this.handleCloseC = this.handleCloseC.bind(this);
@@ -83,14 +84,16 @@ class Prodacts extends Component {
           >
             {this.props.category.map((cat, index) => {
               return (
-                <Col lg={8} sm={3}>
-                  <Category
-                    name={cat.name}
-                    id={cat.id}
-                    subCategories={cat.SubCategories}
-                    deleteCategory={this.delete}
-                  />
-                </Col>
+                <>
+                  <Col lg={8} sm={3}>
+                    <Category
+                      name={cat.name}
+                      id={cat.id}
+                      subCategories={cat.SubCategories}
+                      deleteCategory={this.delete}
+                    />
+                  </Col>
+                </>
               );
             })}
           </Row>

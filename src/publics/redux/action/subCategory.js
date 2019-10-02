@@ -36,15 +36,11 @@ export const deleteSubCategory = params => {
     )
   };
 };
-export const editSubCategory = (id, name) => {
-  const param = qs.stringify({
-    name: name
-  });
+export const getSubCategoryId = id => {
   return {
-    type: "EDIT_SUBCATEGORY",
-    payload: Axios.patch(
-      `https://mobile-provider-clone.herokuapp.com/subCategory/${id}`,
-      param
+    type: "GET_SUBCATEGORYID",
+    payload: Axios.get(
+      `https://mobile-provider-clone.herokuapp.com/subCategory/${id}`
     )
   };
 };

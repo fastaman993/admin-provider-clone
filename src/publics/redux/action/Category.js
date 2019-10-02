@@ -8,20 +8,6 @@ export const getCategory = () => {
   };
 };
 
-export const getProduct = id => {
-  let param = {
-    params: {
-      SubCategoryId: id
-    }
-  };
-  return {
-    type: "GET_PRODUCT",
-    payload: Axios.get(
-      `https://mobile-provider-clone.herokuapp.com/product/`,
-      param
-    )
-  };
-};
 export const postCategory = params => {
   const param = qs.stringify({
     name: params

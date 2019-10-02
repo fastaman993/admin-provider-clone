@@ -1,7 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { Grid, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { getProduct } from "../publics/redux/action/Category";
+import {
+  getProduct,
+  postProduct,
+  editProduct,
+  deleteProduct
+} from "../publics/redux/action/Product";
+import { getSubCategoryId } from "../publics/redux/action/subCategory";
 import { connect } from "react-redux";
 import Item from "../components/subCategory/subCategory";
 import Modal from "../components/Modal/modalProduct";
@@ -21,7 +27,9 @@ class Category extends Component {
       modalProdact: false,
       modalEdit: false,
       products: [],
-      loading: true
+      subCategory: [],
+      loading: true,
+      dataItem: []
     };
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -35,8 +43,10 @@ class Category extends Component {
   handleClose() {
     this.setState({ modalProdact: false });
   }
-  handleShowE() {
-    this.setState({ modalEdit: true });
+  handleShowE(param) {
+    let fill = this.state.products.filter(item => item.id === param);
+
+    this.setState({ modalEdit: true, dataItem: fill });
   }
   handleCloseE() {
     this.setState({ modalEdit: false });
@@ -45,12 +55,41 @@ class Category extends Component {
   componentDidMount = async () => {
     const param = this.props.match.params.id;
     await this.props.dispatch(getProduct(param));
+    await this.props.dispatch(getSubCategoryId(param));
     this.setState({
-      products: this.props.products.rows,
-      loading: this.props.loading
+      products: this.props.products.response.rows,
+      loading: this.props.loading,
+      subCategory: this.props.subCategory.rows
     });
   };
+  handleSubmit = param => {
+    this.props
+      .dispatch(postProduct(param))
+      .then(() => {
+        this.setState({ modalProdact: false });
+      })
+      .catch(err => console.log(err));
+  };
+  handleDelete = id => {
+    this.props.dispatch(deleteProduct(id)).then(() => {
+      this.setState({
+        products: this.props.products
+      });
+    });
+  };
+  handleSubmitEdit = (id, data) => {
+    this.props
+      .dispatch(editProduct(id, data))
+      .then(() => {
+        window.location.reload();
+      })
+      .catch(err => console.log(err));
+  };
   render() {
+    // const data = this.state.subCategory[0];
+    // console.log("INI DATA", data);
+    console.log(this.state);
+
     return (
       <Fragment>
         {this.state.loading ? (
@@ -68,28 +107,42 @@ class Category extends Component {
               <Row style={{ marginTop: "50px", marginLeft: "10px" }}>
                 {this.state.products.map((product, index) => {
                   return (
-                    <Col lg={12} sm={4}>
-                      <Item
-                        key={index}
-                        name={product.name}
-                        detail={product.description}
-                        price={product.price}
-                        discprice={product.discprice}
-                        discount={product.discount}
-                        bandwidth={product.bandwidth}
-                        duration={product.duration}
-                        opens={this.handleShowE}
-                      />
-                    </Col>
+                    <>
+                      <Col lg={12} sm={4}>
+                        <Item
+                          key={index}
+                          idNya={product.id}
+                          name={product.name}
+                          detail={product.description}
+                          price={product.price}
+                          discprice={product.discprice}
+                          discount={product.discount}
+                          bandwidth={product.bandwidth}
+                          duration={product.duration}
+                          opens={this.handleShowE}
+                          hapus={this.handleDelete}
+                        />
+                      </Col>
+                    </>
                   );
                 })}
               </Row>
             </Grid>
-            <Modal status={this.state.modalProdact} close={this.handleClose} />
-            <ModalEdits
-              status={this.state.modalEdit}
-              close={this.handleCloseE}
+            <Modal
+              idSub={this.state.subCategory.id}
+              idCat={this.state.subCategory.CategoryId}
+              status={this.state.modalProdact}
+              close={this.handleClose}
+              post={this.handleSubmit}
             />
+            {this.state.modalEdit ? (
+              <ModalEdits
+                status={this.state.modalEdit}
+                close={this.handleCloseE}
+                dataNya={this.state.dataItem}
+                patch={this.handleSubmitEdit}
+              />
+            ) : null}
           </>
         )}
       </Fragment>
@@ -98,7 +151,8 @@ class Category extends Component {
 }
 const mapStateToProps = state => {
   return {
-    products: state.Category.product.response,
+    products: state.Product.product,
+    subCategory: state.subCategory.subCategoryId.response,
     loading: state.Category.isLoading
   };
 };
