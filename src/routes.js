@@ -21,7 +21,7 @@ import TableList from "views/TableList.jsx";
 import Typography from "views/Typography.jsx";
 import Icons from "views/Icons.jsx";
 import Maps from "views/Maps.jsx";
-import Notifications from "views/Notifications.jsx";
+import Report from "views/Report";
 import Upgrade from "views/Upgrade.jsx";
 import Login from "views/Login";
 import Prodacts from "views/Prodacts";
@@ -36,13 +36,13 @@ const dashboardRoutes = [
     component: Dashboard,
     layout: "/admin"
   },
-  {
-    path: "/user",
-    name: "User Profile",
-    icon: "pe-7s-user",
-    component: UserProfile,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/user",
+  //   name: "User Profile",
+  //   icon: "pe-7s-user",
+  //   component: UserProfile,
+  //   layout: "/admin"
+  // },
   {
     path: "/table",
     name: "User List",
@@ -57,20 +57,20 @@ const dashboardRoutes = [
     component: Login,
     layout: "/login"
   },
-  {
-    path: "/typography",
-    name: "Typography",
-    icon: "pe-7s-news-paper",
-    component: Typography,
-    layout: "/admin"
-  },
-  {
-    path: "/icons",
-    name: "Icons",
-    icon: "pe-7s-science",
-    component: Icons,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/typography",
+  //   name: "Typography",
+  //   icon: "pe-7s-news-paper",
+  //   component: Typography,
+  //   layout: "/admin"
+  // },
+  // {
+  //   path: "/icons",
+  //   name: "Icons",
+  //   icon: "pe-7s-science",
+  //   component: Icons,
+  //   layout: "/admin"
+  // },
   {
     path: "/prodacts",
     name: "Prodacts",
@@ -79,7 +79,7 @@ const dashboardRoutes = [
     layout: "/admin"
   },
   {
-    path: "/tes",
+    path: "/history",
     name: "History",
     icon: "pe-7s-clock",
     component: History,
@@ -101,10 +101,10 @@ const dashboardRoutes = [
   //   layout: "/admin"
   // },
   {
-    path: "/notifications",
-    name: "Notifications",
+    path: "/UserReport",
+    name: "User Report",
     icon: "pe-7s-bell",
-    component: Notifications,
+    component: Report,
     layout: "/admin"
   }
   // {
