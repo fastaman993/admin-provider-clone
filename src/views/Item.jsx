@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 import Item from "../components/subCategory/subCategory";
 import Modal from "../components/Modal/modalProduct";
 import ModalEdits from "../components/Modal/modelEdit";
-
+import Swal from "sweetalert2";
 import Loadings from "../components/Loading/loading";
 
 class Category extends Component {
@@ -71,11 +71,31 @@ class Category extends Component {
       .catch(err => console.log(err));
   };
   handleDelete = id => {
-    this.props.dispatch(deleteProduct(id)).then(() => {
-      this.setState({
-        products: this.props.products
-      });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(result => {
+      if (result.value) {
+        this.props.dispatch(deleteProduct(id));
+        Swal.fire("Deleted!", "Your data has been deleted.", "success").then(
+          () => {
+            this.setState({
+              products: this.props.products
+            });
+          }
+        );
+      }
     });
+    // this.props.dispatch(deleteProduct(id)).then(() => {
+    //   this.setState({
+    //     products: this.props.products
+    //   });
+    // });
   };
   handleSubmitEdit = (id, data) => {
     this.props

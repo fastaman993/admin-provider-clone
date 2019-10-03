@@ -38,7 +38,7 @@ const Item = props => {
         <div className="footer">
           <hr />
           <div className="stats" style={{ width: "100%" }}>
-            <p>Description : {props.detail}</p>
+            <p>{props.detail}</p>
 
             <Col md={6} style={{ marginTop: "10px" }}>
               <p style={{ textAlign: "left" }}>

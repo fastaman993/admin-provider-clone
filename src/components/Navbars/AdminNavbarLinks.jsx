@@ -12,7 +12,9 @@ class AdminNavbarLinks extends Component {
       <div>
         <Nav pullRight>
           <NavItem eventKey={3} onClick={this.logout}>
-            <Link to={"/login"}>Log out</Link>
+            <Link to={"/login"}>
+              <span style={{ textDecoration: "none" }}>Log out</span>
+            </Link>
           </NavItem>
         </Nav>
       </div>

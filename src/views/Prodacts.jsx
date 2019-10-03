@@ -7,6 +7,8 @@ import ModalItem from "../components/Modal/modalItem";
 import { postCategory, deleteCategory } from "../publics/redux/action/Category";
 import { postSubCategory } from "../publics/redux/action/subCategory";
 import { connect } from "react-redux";
+import Swal from "sweetalert2";
+import { async } from "q";
 
 class Prodacts extends Component {
   constructor(props) {
@@ -51,12 +53,30 @@ class Prodacts extends Component {
       .catch(err => console.log(err));
   };
   delete = param => {
-    this.props
-      .dispatch(deleteCategory(param))
-      .then(() => {
-        window.location.reload();
-      })
-      .catch(err => console.log(err));
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(result => {
+      if (result.value) {
+        this.props.dispatch(deleteCategory(param));
+        Swal.fire("Deleted!", "Your data has been deleted.", "success").then(
+          () => {
+            window.location.reload();
+          }
+        );
+      }
+    });
+    // this.props
+    //   .dispatch(deleteCategory(param))
+    //   .then(() => {
+    //     window.location.reload();
+    //   })
+    //   .catch(err => console.log(err));
   };
   render() {
     return (

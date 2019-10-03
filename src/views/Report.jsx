@@ -42,30 +42,46 @@ class Notifications extends Component {
     console.log(this.state);
 
     return (
-      <div>
+      <div style={{ marginTop: "20px" }}>
         {this.state.loading ? (
           <div style={{ marginTop: "50%" }}>
             <Loading />
           </div>
         ) : this.state.report.length > 0 ? (
           <Grid fluid>
-            <h4 className="title">User Report</h4>
-
-            <div className="content">
-              <Row>
-                {this.state.report.map((data, idex) => {
-                  return (
-                    <Col md={4}>
-                      <UserCard
-                        dataUser={data.User}
-                        report={data.complain}
-                        date={data.createdAt}
-                      />
-                    </Col>
-                  );
-                })}
-              </Row>
-            </div>
+            <Row>
+              <Col md={12}>
+                <Card
+                  title="All User"
+                  ctTableFullWidth
+                  ctTableResponsive
+                  content={
+                    <Table striped hover>
+                      <thead>
+                        <tr>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Number Phone</th>
+                          <th>Complain</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {this.state.report.map((data, index) => (
+                          <tr>
+                            <td key={index}>{data.User.name}</td>
+                            <td key={index}>{data.User.email}</td>
+                            <td key={index}>{data.User.phone}</td>
+                            <td style={{ wordWrap: "break-word" }} key={index}>
+                              {data.complain}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </Table>
+                  }
+                />
+              </Col>
+            </Row>
           </Grid>
         ) : (
           <Grid fluid style={{ marginTop: "20px" }}>

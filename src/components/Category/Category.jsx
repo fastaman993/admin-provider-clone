@@ -3,12 +3,31 @@ import { Row, Col, Button, Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { deleteSubCategory } from "../../publics/redux/action/subCategory";
 import { connect } from "react-redux";
+import Swal from "sweetalert2";
 
 class Category extends Component {
   delete = paramId => {
-    this.props.dispatch(deleteSubCategory(paramId)).then(() => {
-      window.location.reload();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(result => {
+      if (result.value) {
+        this.props.dispatch(deleteSubCategory(paramId));
+        Swal.fire("Deleted!", "Your data has been deleted.", "success").then(
+          () => {
+            window.location.reload();
+          }
+        );
+      }
     });
+    // this.props.dispatch(deleteSubCategory(paramId)).then(() => {
+    //   window.location.reload();
+    // });
   };
 
   render() {
@@ -47,7 +66,8 @@ class Category extends Component {
                                       onClick={() => this.delete(sub.id)}
                                       style={{
                                         marginRight: "10px",
-                                        color: "red"
+                                        color: "red",
+                                        cursor: "pointer"
                                       }}
                                     >
                                       Hapus
