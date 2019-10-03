@@ -29,7 +29,7 @@ import Load from "../components/Loading/loading";
 import { style } from "variables/Variables.jsx";
 import routes from "routes.js";
 import { getCategory } from "../publics/redux/action/Category";
-
+import localStorage from "local-storage";
 import image from "assets/img/sidebar-3.jpg";
 
 class Admin extends Component {
@@ -80,44 +80,19 @@ class Admin extends Component {
   };
 
   componentDidMount = async () => {
-    await this.props.dispatch(getCategory());
+    const token = localStorage.get("token");
 
-    this.setState({
-      loadings: this.props.loading,
-      category: this.props.category.rows,
-      rejet: this.props.reject
-    });
-    // let _notificationSystem = this.refs.notificationSystem;
-    // let color = Math.floor(Math.random() * 4 + 1);
-    // let level;
-    // switch (color) {
-    //   case 1:
-    //     level = "success";
-    //     break;
-    //   case 2:
-    //     level = "warning";
-    //     break;
-    //   case 3:
-    //     level = "error";
-    //     break;
-    //   case 4:
-    //     level = "info";
-    //     break;
-    //   default:
-    //     break;
-    // }
-    // _notificationSystem.addNotification({
-    //   title: <span data-notify="icon" className="pe-7s-gift" />,
-    //   message: (
-    //     <div>
-    //       Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for
-    //       every web developer.
-    //     </div>
-    //   ),
-    //   level: level,
-    //   position: "tr",
-    //   autoDismiss: 15
-    // });
+    if (token) {
+      await this.props.dispatch(getCategory());
+
+      this.setState({
+        loadings: this.props.loading,
+        category: this.props.category.rows,
+        rejet: this.props.reject
+      });
+    } else {
+      window.location = "/login";
+    }
   };
   componentDidUpdate(e) {
     if (

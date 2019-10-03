@@ -16,7 +16,9 @@
 
 */
 import React, { Component } from "react";
-import { Grid, Row, Col, Alert } from "react-bootstrap";
+import { Grid, Row, Col, Table } from "react-bootstrap";
+import Card from "components/Card/Card.jsx";
+
 import UserCard from "../components/UserCard/UserCard";
 import { connect } from "react-redux";
 import { getReport } from "../publics/redux/action/report";
@@ -45,7 +47,7 @@ class Notifications extends Component {
           <div style={{ marginTop: "50%" }}>
             <Loading />
           </div>
-        ) : (
+        ) : this.state.report.length > 0 ? (
           <Grid fluid>
             <h4 className="title">User Report</h4>
 
@@ -64,6 +66,23 @@ class Notifications extends Component {
                 })}
               </Row>
             </div>
+          </Grid>
+        ) : (
+          <Grid fluid style={{ marginTop: "20px" }}>
+            <Row>
+              <Col md={12}>
+                <Card
+                  title="User Transaction"
+                  ctTableFullWidth
+                  ctTableResponsive
+                  content={
+                    <p style={{ textAlign: "center" }}>
+                      Alhamdulilah Belum ada
+                    </p>
+                  }
+                />
+              </Col>
+            </Row>
           </Grid>
         )}
       </div>

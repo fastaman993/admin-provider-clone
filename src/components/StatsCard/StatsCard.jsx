@@ -24,8 +24,11 @@ export class StatsCard extends Component {
       <div className="card card-stats">
         <div className="content">
           <Row>
-            <Col xs={5}>
-              <div className="icon-big text-center icon-warning">
+            <Col md={5}>
+              <div
+                className="icon-big text-center icon-warning"
+                style={{ height: "100px" }}
+              >
                 {this.props.bigIcon}
               </div>
             </Col>

@@ -5,6 +5,7 @@ import Product from "./prodact";
 import Users from "./user";
 import Transaction from "./Transaction";
 import Report from "./report";
+import Login from "./auth";
 
 const rootReducer = combineReducers({
   Category,
@@ -12,7 +13,8 @@ const rootReducer = combineReducers({
   Product,
   Users,
   Transaction,
-  Report
+  Report,
+  Login
 });
 
 export default rootReducer;

@@ -1,27 +1,11 @@
-/*!
-
-=========================================================
-* Light Bootstrap Dashboard React - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
-* Copyright 2019 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React, { Component } from "react";
 import ChartistGraph from "react-chartist";
-import { Grid, Row, Col } from "react-bootstrap";
+import { Grid, Row, Col, Table } from "react-bootstrap";
 
 import { Card } from "components/Card/Card.jsx";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
 import { Tasks } from "components/Tasks/Tasks.jsx";
+import { getTransaction } from "../publics/redux/action/Transaction";
 import {
   dataPie,
   legendPie,
@@ -35,168 +19,158 @@ import {
   legendBar
 } from "variables/Variables.jsx";
 import { getUser } from "../publics/redux/action/user";
+import { connect } from "react-redux";
+import Loadings from "../components/Loading/loading";
 
 class Dashboard extends Component {
-  createLegend(json) {
-    let legend = [];
-    for (let i = 0; i < json["names"].length; i++) {
-      var type = "fa fa-circle text-" + json["types"][i];
-      legend.push(<i className={type} key={i} />);
-      legend.push(" ");
-      legend.push(json["names"][i]);
-    }
-    return legend;
-  }
+  state = {
+    transaction: [],
+    users: [],
+    loading: true,
+    reject: false
+  };
+  componentDidMount = async () => {
+    await this.props.dispatch(getUser());
+    await this.props.dispatch(getTransaction());
+    this.setState({
+      transaction: this.props.transaction.rows,
+      users: this.props.users,
+      loading: this.props.loading,
+      reject: this.props.reject
+    });
+  };
+  convertTimeStamp = timeStamp => {
+    timeStamp.toString();
+    return timeStamp.slice(0, 10);
+  };
   render() {
+    console.log(this.state.transaction);
+
     return (
       <div className="content">
-        <Grid fluid>
-          <Row>
-            <Col lg={3} sm={6}>
-              <StatsCard
-                bigIcon={<i className="pe-7s-users text-light" />}
-                statsText="Users"
-                statsValue="1200"
-                statsIcon={<i className="fa fa-refresh" />}
-                statsIconText="Updated now"
-              />
-            </Col>
-            <Col lg={3} sm={6}>
-              <StatsCard
-                bigIcon={<i className="pe-7s-wallet text-success" />}
-                statsText="Total Transaction"
-                statsValue="$1,345"
-                statsIcon={<i className="fa fa-calendar-o" />}
-                statsIconText="Last day"
-              />
-            </Col>
-            {/* <Col lg={3} sm={6}>
-              <StatsCard
-                bigIcon={<i className="pe-7s-graph1 text-danger" />}
-                statsText="Errors"
-                statsValue="23"
-                statsIcon={<i className="fa fa-clock-o" />}
-                statsIconText="In the last hour"
-              />
-            </Col>
-            <Col lg={3} sm={6}>
-              <StatsCard
-                bigIcon={<i className="fa fa-twitter text-info" />}
-                statsText="Followers"
-                statsValue="+45"
-                statsIcon={<i className="fa fa-refresh" />}
-                statsIconText="Updated now"
-              />
-            </Col> */}
-          </Row>
-          <Row>
-            <Col md>
-              <Card
-                id="chartActivity"
-                title="2019 Sales"
-                category="All Kondom products including Vagina"
-                stats="Data information certified"
-                statsIcon="fa fa-check"
-                content={
-                  <div className="ct-chart">
-                    <ChartistGraph
-                      data={dataBar}
-                      type="Bar"
-                      options={optionsBar}
-                      responsiveOptions={responsiveBar}
-                    />
-                  </div>
-                }
-                legend={
-                  <div className="legend">{this.createLegend(legendBar)}</div>
-                }
-              />
-              {/* <Card
-                statsIcon="fa fa-history"
-                id="chartHours"
-                title="Users Behavior"
-                category="24 Hours performance"
-                stats="Updated 3 minutes ago"
-                content={
-                  <div className="ct-chart">
-                    <ChartistGraph
-                      data={dataSales}
-                      type="Line"
-                      options={optionsSales}
-                      responsiveOptions={responsiveSales}
-                    />
-                  </div>
-                }
-                legend={
-                  <div className="legend">{this.createLegend(legendSales)}</div>
-                }
-              /> */}
-            </Col>
-            {/* <Col md={4}>
-              <Card
-                statsIcon="fa fa-clock-o"
-                title="Email Statistics"
-                category="Last Campaign Performance"
-                stats="Campaign sent 2 days ago"
-                content={
-                  <div
-                    id="chartPreferences"
-                    className="ct-chart ct-perfect-fourth"
-                  >
-                    <ChartistGraph data={dataPie} type="Pie" />
-                  </div>
-                }
-                legend={
-                  <div className="legend">{this.createLegend(legendPie)}</div>
-                }
-              />
-            </Col> */}
-          </Row>
-
-          {/* <Row>
-            <Col md={6}>
-              <Card
-                id="chartActivity"
-                title="2014 Sales"
-                category="All products including Taxes"
-                stats="Data information certified"
-                statsIcon="fa fa-check"
-                content={
-                  <div className="ct-chart">
-                    <ChartistGraph
-                      data={dataBar}
-                      type="Bar"
-                      options={optionsBar}
-                      responsiveOptions={responsiveBar}
-                    />
-                  </div>
-                }
-                legend={
-                  <div className="legend">{this.createLegend(legendBar)}</div>
-                }
-              />
-            </Col>
-
-            <Col md={6}>
-              <Card
-                title="Tasks"
-                category="Backend development"
-                stats="Updated 3 minutes ago"
-                statsIcon="fa fa-history"
-                content={
-                  <div className="table-full-width">
-                    <table className="table">
-                      <Tasks />
-                    </table>
-                  </div>
-                }
-              />
-            </Col>
-          </Row> */}
-        </Grid>
+        {this.state.loading ? (
+          <div style={{ marginTop: "50%" }}>
+            <Loadings />
+          </div>
+        ) : (
+          <Grid fluid>
+            <Row>
+              <Col lg={3} sm={6}>
+                <StatsCard
+                  bigIcon={<i className="pe-7s-users text-light" />}
+                  statsText="Users"
+                  statsValue={this.state.users.users.length}
+                  statsIcon={<i className="fa fa-refresh" />}
+                  statsIconText="Updated now"
+                />
+              </Col>
+              <Col lg={3} sm={6}>
+                <StatsCard
+                  bigIcon={<i className="pe-7s-wallet text-success" />}
+                  statsText="Total Transaction"
+                  statsValue={this.state.transaction.length}
+                  statsIcon={<i className="fa fa-calendar-o" />}
+                  statsIconText="Last day"
+                />
+              </Col>
+            </Row>
+            <Row>
+              <Col md>
+                {this.state.transaction ? (
+                  <Grid fluid>
+                    <Row>
+                      <Col md={12}>
+                        <Card
+                          title="All Transaction"
+                          ctTableFullWidth
+                          ctTableResponsive
+                          content={
+                            <Table hover>
+                              <thead>
+                                <tr>
+                                  <th>Name</th>
+                                  <th>Number Phone</th>
+                                  <th>Product</th>
+                                  <th>Date</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                {this.state.transaction.map((trans, index) => {
+                                  return (
+                                    <>
+                                      <tr>
+                                        <td key={index}>{trans.User.name}</td>
+                                        <td key={index}>{trans.User.phone}</td>
+                                        <td key={index}>
+                                          {trans.Product.name}
+                                        </td>
+                                        <td key={index}>
+                                          {this.convertTimeStamp(
+                                            trans.createdAt
+                                          )}
+                                        </td>
+                                      </tr>
+                                    </>
+                                  );
+                                })}
+                              </tbody>
+                            </Table>
+                          }
+                        />
+                      </Col>
+                    </Row>
+                  </Grid>
+                ) : (
+                  <Grid fluid>
+                    <Row>
+                      <Col md={12}>
+                        <Card
+                          title="All User"
+                          ctTableFullWidth
+                          ctTableResponsive
+                          content={
+                            <Table striped hover>
+                              <thead>
+                                <tr>
+                                  <th>Name</th>
+                                  <th>Email</th>
+                                  <th>Credit</th>
+                                  <th>Number Phone</th>
+                                  <th>Add On</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr>
+                                  <td
+                                    colSpan="5"
+                                    style={{ textAlign: "center" }}
+                                  >
+                                    Data Not Found
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </Table>
+                          }
+                        />
+                      </Col>
+                    </Row>
+                  </Grid>
+                )}
+              </Col>
+            </Row>
+          </Grid>
+        )}
       </div>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    transaction: state.Transaction.transaction,
+    users: state.Users,
+    loading: state.Users.isLoading,
+    reject: state.Users.isRejected
+  };
+};
 
-export default Dashboard;
+export default connect(mapStateToProps)(Dashboard);

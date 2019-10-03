@@ -78,13 +78,13 @@ const dashboardRoutes = [
     component: Prodacts,
     layout: "/admin"
   },
-  {
-    path: "/history",
-    name: "History",
-    icon: "pe-7s-clock",
-    component: History,
-    layout: "/admin"
-  },
+  // {
+  //   path: "/history",
+  //   name: "History",
+  //   icon: "pe-7s-clock",
+  //   component: History,
+  //   layout: "/admin"
+  // },
   {
     path: "/item/:id",
     name: "Prodacts Item",

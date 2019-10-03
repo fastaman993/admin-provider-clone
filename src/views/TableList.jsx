@@ -38,8 +38,6 @@ class TableList extends Component {
     });
   };
   render() {
-    console.log(this.state.users);
-
     return (
       <div className="content">
         {this.state.loading ? (
@@ -66,63 +64,33 @@ class TableList extends Component {
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          {this.state.users.users.map((user, index) => {
+                        {this.state.users.users.map((user, index) => {
+                          if (user.role !== "admin") {
                             return (
                               <>
-                                <td key={index}>{user.name}</td>
-                                <td key={index}>{user.email}</td>
-                                <td key={index}>{user.credit}</td>
-                                <td key={index}>{user.phone}</td>
-                                <td key={index}>
-                                  <Button
-                                    bsStyle="danger"
-                                    onClick={this.handleShow}
-                                  >
-                                    PANIC BUTTON
-                                  </Button>
-                                </td>
+                                <tr>
+                                  <td key={index}>{user.name}</td>
+                                  <td key={index}>{user.email}</td>
+                                  <td key={index}>{user.credit}</td>
+                                  <td key={index}>{user.phone}</td>
+                                  <td key={index}>
+                                    <Button
+                                      bsStyle="danger"
+                                      onClick={this.handleShow}
+                                    >
+                                      PANIC BUTTON
+                                    </Button>
+                                  </td>
+                                </tr>
                               </>
                             );
-                          })}
-                        </tr>
-                      </tbody>
-                    </Table>
-                  }
-                />
-              </Col>
-
-              {/* <Col md={12}>
-                <Card
-                  plain
-                  title="Striped Table with Hover"
-                  category="Here is a subtitle for this table"
-                  ctTableFullWidth
-                  ctTableResponsive
-                  content={
-                    <Table hover>
-                      <thead>
-                        <tr>
-                          {thArray.map((prop, key) => {
-                            return <th key={key}>{prop}</th>;
-                          })}
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {tdArray.map((prop, key) => {
-                          return (
-                            <tr key={key}>
-                              {prop.map((prop, key) => {
-                                return <td key={key}>{prop}</td>;
-                              })}
-                            </tr>
-                          );
+                          }
                         })}
                       </tbody>
                     </Table>
                   }
                 />
-              </Col> */}
+              </Col>
             </Row>
           </Grid>
         ) : (
