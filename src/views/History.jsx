@@ -19,6 +19,11 @@ class TableList extends Component {
       reject: this.props.reject
     });
   };
+
+  convertTimeStamp = timeStamp => {
+    timeStamp.toString();
+    return timeStamp.slice(0, 10);
+  };
   render() {
     console.log(this.state.transaction);
 
@@ -33,41 +38,34 @@ class TableList extends Component {
             <Row>
               <Col md={12}>
                 <Card
-                  title="All User"
+                  title="All Transaction"
                   ctTableFullWidth
                   ctTableResponsive
                   content={
-                    <Table striped hover>
+                    <Table hover>
                       <thead>
                         <tr>
                           <th>Name</th>
-                          <th>Email</th>
-                          <th>Credit</th>
                           <th>Number Phone</th>
-                          <th>Add On</th>
+                          <th>Product</th>
+                          <th>Date</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          {this.state.transaction.map((user, index) => {
-                            return (
-                              <>
-                                <td key={index}>{user.name}</td>
-                                <td key={index}>{user.email}</td>
-                                <td key={index}>{user.credit}</td>
-                                <td key={index}>{user.phone}</td>
+                        {this.state.transaction.map((trans, index) => {
+                          return (
+                            <>
+                              <tr>
+                                <td key={index}>{trans.User.name}</td>
+                                <td key={index}>{trans.User.phone}</td>
+                                <td key={index}>{trans.Product.name}</td>
                                 <td key={index}>
-                                  <Button
-                                    bsStyle="danger"
-                                    onClick={this.handleShow}
-                                  >
-                                    PANIC BUTTON
-                                  </Button>
+                                  {this.convertTimeStamp(trans.createdAt)}
                                 </td>
-                              </>
-                            );
-                          })}
-                        </tr>
+                              </tr>
+                            </>
+                          );
+                        })}
                       </tbody>
                     </Table>
                   }
