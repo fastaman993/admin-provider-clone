@@ -21,6 +21,7 @@ import { NavLink } from "react-router-dom";
 import AdminNavbarLinks from "../Navbars/AdminNavbarLinks.jsx";
 
 import logo from "assets/img/reactlogo.png";
+import "../../assets/css/mycss.css";
 
 class Sidebar extends Component {
   constructor(props) {
@@ -42,10 +43,9 @@ class Sidebar extends Component {
   render() {
     return (
       <div
-        id="sidebar"
         className="sidebar"
         // data-color="purple"
-        // style={{ backgroundColor: "purple" }}
+
         // data-image={this.props.image}
       >
         {/* {this.props.hasImage ? (
@@ -54,10 +54,13 @@ class Sidebar extends Component {
         <div className="logo">
           <a className="simple-text logo-mini">
             <div className="logo-img">
-              <img src={logo} alt="logo_image" />
+              <img
+                src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/Axis_logo_2015.svg/1280px-Axis_logo_2015.svg.png"
+                alt="logo_image"
+              />
             </div>
           </a>
-          <a className="simple-text logo-normal">TOKET</a>
+          <span className="simple-text ">My Axis</span>
         </div>
         <div className="sidebar-wrapper">
           <ul className="nav">

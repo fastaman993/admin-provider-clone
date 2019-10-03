@@ -153,7 +153,6 @@ class Admin extends Component {
 
     return (
       <div className="wrapper">
-        <NotificationSystem ref="notificationSystem" style={style} />
         <Sidebar {...this.props} routes={routes} />
         <div id="main-panel" className="main-panel" ref="mainPanel">
           <AdminNavbar
