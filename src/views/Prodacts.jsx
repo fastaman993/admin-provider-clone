@@ -71,12 +71,6 @@ class Prodacts extends Component {
         );
       }
     });
-    // this.props
-    //   .dispatch(deleteCategory(param))
-    //   .then(() => {
-    //     window.location.reload();
-    //   })
-    //   .catch(err => console.log(err));
   };
   render() {
     return (
@@ -93,7 +87,6 @@ class Prodacts extends Component {
             Add Item
           </Button>
         </div>
-        {/* <h1>Hello Wold</h1> */}
         <Grid fluid>
           <Row
             style={{

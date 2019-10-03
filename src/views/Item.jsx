@@ -7,6 +7,8 @@ import {
   editProduct,
   deleteProduct
 } from "../publics/redux/action/Product";
+import Card from "components/Card/Card.jsx";
+
 import { getSubCategoryId } from "../publics/redux/action/subCategory";
 import { connect } from "react-redux";
 import Item from "../components/subCategory/subCategory";
@@ -16,11 +18,6 @@ import Swal from "sweetalert2";
 import Loadings from "../components/Loading/loading";
 
 class Category extends Component {
-  // state = {
-  //   modalProdact: false,
-  //   products: [],
-  //   loading: true
-  // };
   constructor(props) {
     super(props);
     this.state = {
@@ -84,18 +81,11 @@ class Category extends Component {
         this.props.dispatch(deleteProduct(id));
         Swal.fire("Deleted!", "Your data has been deleted.", "success").then(
           () => {
-            this.setState({
-              products: this.props.products
-            });
+            window.location.reload();
           }
         );
       }
     });
-    // this.props.dispatch(deleteProduct(id)).then(() => {
-    //   this.setState({
-    //     products: this.props.products
-    //   });
-    // });
   };
   handleSubmitEdit = (id, data) => {
     this.props
@@ -106,10 +96,6 @@ class Category extends Component {
       .catch(err => console.log(err));
   };
   render() {
-    // const data = this.state.subCategory[0];
-    // console.log("INI DATA", data);
-    console.log(this.state);
-
     return (
       <Fragment>
         {this.state.loading ? (
@@ -125,27 +111,41 @@ class Category extends Component {
             </div>
             <Grid fluid>
               <Row style={{ marginTop: "50px" }}>
-                {this.state.products.map((product, index) => {
-                  return (
-                    <>
-                      <Col lg={12} sm={4}>
-                        <Item
-                          key={index}
-                          idNya={product.id}
-                          name={product.name}
-                          detail={product.description}
-                          price={product.price}
-                          discprice={product.discprice}
-                          discount={product.discount}
-                          bandwidth={product.bandwidth}
-                          duration={product.duration}
-                          opens={this.handleShowE}
-                          hapus={this.handleDelete}
+                {this.state.products.length > 0 ? (
+                  this.state.products.map((product, index) => {
+                    return (
+                      <>
+                        <Col lg={12} sm={4}>
+                          <Item
+                            key={index}
+                            idNya={product.id}
+                            name={product.name}
+                            detail={product.description}
+                            price={product.price}
+                            discprice={product.discprice}
+                            discount={product.discount}
+                            bandwidth={product.bandwidth}
+                            duration={product.duration}
+                            opens={this.handleShowE}
+                            hapus={this.handleDelete}
+                          />
+                        </Col>
+                      </>
+                    );
+                  })
+                ) : (
+                  <Grid fluid style={{ marginTop: "5px" }}>
+                    <Row>
+                      <Col md={12}>
+                        <Card
+                          title="Data Tidak Ada"
+                          ctTableFullWidth
+                          ctTableResponsive
                         />
                       </Col>
-                    </>
-                  );
-                })}
+                    </Row>
+                  </Grid>
+                )}
               </Row>
             </Grid>
             <Modal

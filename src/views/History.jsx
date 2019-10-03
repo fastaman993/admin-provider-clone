@@ -25,8 +25,6 @@ class TableList extends Component {
     return timeStamp.slice(0, 10);
   };
   render() {
-    console.log(this.state.transaction);
-
     return (
       <div className="content">
         {this.state.loading ? (

@@ -52,8 +52,6 @@ class Login extends Component {
       .catch(() => this.setState({ error: true, loading: false }));
   };
   render() {
-    console.log(this.state);
-
     return (
       <Fragment>
         <div className="master">

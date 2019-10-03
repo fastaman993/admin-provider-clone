@@ -1,23 +1,10 @@
 import React, { Component } from "react";
-import ChartistGraph from "react-chartist";
 import { Grid, Row, Col, Table } from "react-bootstrap";
 
 import { Card } from "components/Card/Card.jsx";
 import { StatsCard } from "components/StatsCard/StatsCard.jsx";
-import { Tasks } from "components/Tasks/Tasks.jsx";
 import { getTransaction } from "../publics/redux/action/Transaction";
-import {
-  dataPie,
-  legendPie,
-  dataSales,
-  optionsSales,
-  responsiveSales,
-  legendSales,
-  dataBar,
-  optionsBar,
-  responsiveBar,
-  legendBar
-} from "variables/Variables.jsx";
+
 import { getUser } from "../publics/redux/action/user";
 import { connect } from "react-redux";
 import Loadings from "../components/Loading/loading";
@@ -44,8 +31,6 @@ class Dashboard extends Component {
     return timeStamp.slice(0, 10);
   };
   render() {
-    console.log(this.state.transaction);
-
     return (
       <div className="content">
         {this.state.loading ? (
