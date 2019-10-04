@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Grid, Row, Col, Table, Button } from "react-bootstrap";
 import Loading from "../components/Loading/loading";
 import Card from "components/Card/Card.jsx";
-import { thArray, tdArray } from "variables/Variables.jsx";
 import { getUser } from "../publics/redux/action/user";
 import { connect } from "react-redux";
 import Modal from "../components/Modal/modalPanic";
@@ -94,7 +93,7 @@ class TableList extends Component {
                                       bsStyle="danger"
                                       onClick={() => this.modalOpen(user.id)}
                                     >
-                                      PANIC BUTTON
+                                      TOP UP PANIC
                                     </Button>
                                   </td>
                                 </tr>

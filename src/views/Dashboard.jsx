@@ -31,6 +31,9 @@ class Dashboard extends Component {
     return timeStamp.slice(0, 10);
   };
   render() {
+    // let fill = this.state.users.users.filter(data => data.role !== "admin");
+    // console.log(fill);
+
     return (
       <div className="content">
         {this.state.loading ? (
@@ -44,7 +47,7 @@ class Dashboard extends Component {
                 <StatsCard
                   bigIcon={<i className="pe-7s-users text-light" />}
                   statsText="Users"
-                  statsValue={this.state.users.users.length}
+                  statsValue={(this.state.users.users.length -= 1)}
                   statsIcon={<i className="fa fa-refresh" />}
                   statsIconText="Updated now"
                 />
@@ -61,7 +64,7 @@ class Dashboard extends Component {
             </Row>
             <Row>
               <Col md>
-                {this.state.transaction ? (
+                {this.state.transaction.length > 0 ? (
                   <Grid fluid>
                     <Row>
                       <Col md={12}>
@@ -110,27 +113,26 @@ class Dashboard extends Component {
                     <Row>
                       <Col md={12}>
                         <Card
-                          title="All User"
+                          title="All Transaction"
                           ctTableFullWidth
                           ctTableResponsive
                           content={
-                            <Table striped hover>
+                            <Table hover>
                               <thead>
                                 <tr>
                                   <th>Name</th>
-                                  <th>Email</th>
-                                  <th>Credit</th>
                                   <th>Number Phone</th>
-                                  <th>Add On</th>
+                                  <th>Product</th>
+                                  <th>Date</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
                                   <td
-                                    colSpan="5"
+                                    colSpan={5}
                                     style={{ textAlign: "center" }}
                                   >
-                                    Data Not Found
+                                    Data Belum Ada
                                   </td>
                                 </tr>
                               </tbody>

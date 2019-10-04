@@ -1,11 +1,5 @@
 import React, { Component, Fragment } from "react";
-import {
-  Modal,
-  Button,
-  FormControl,
-  ControlLabel,
-  FormGroup
-} from "react-bootstrap";
+import { Modal, Button, FormControl, ControlLabel } from "react-bootstrap";
 
 class ModalItem extends Component {
   state = {

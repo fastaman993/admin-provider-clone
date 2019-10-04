@@ -4,16 +4,6 @@ import localStorage from "local-storage";
 
 let tok = localStorage.get("token");
 
-let instance = Axios.create({
-  headers: {
-    common: {
-      // can be common or any other method
-      header_key: "PR0V1D3R",
-      token: tok
-    }
-  }
-});
-
 export const getCategory = () => {
   return {
     type: "GET_CATEGORY",

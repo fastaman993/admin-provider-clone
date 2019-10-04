@@ -1,17 +1,8 @@
 import React, { Component, Fragment } from "react";
-import {
-  FormGroup,
-  Col,
-  Form,
-  FormControl,
-  ControlLabel,
-  Checkbox,
-  Button
-} from "react-bootstrap";
+import { FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "../assets/css/login.css";
 import { loginAdmin } from "../publics/redux/action/auth";
 import { connect } from "react-redux";
-import { stat } from "fs";
 import localStorage from "local-storage";
 import Loading from "../components/Loading/loading_login";
 

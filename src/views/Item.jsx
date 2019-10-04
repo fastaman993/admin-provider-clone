@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { Grid, Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 import {
   getProduct,
   postProduct,

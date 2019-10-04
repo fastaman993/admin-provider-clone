@@ -8,7 +8,6 @@ import { postCategory, deleteCategory } from "../publics/redux/action/Category";
 import { postSubCategory } from "../publics/redux/action/subCategory";
 import { connect } from "react-redux";
 import Swal from "sweetalert2";
-import { async } from "q";
 
 class Prodacts extends Component {
   constructor(props) {

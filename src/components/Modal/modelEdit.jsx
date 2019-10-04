@@ -6,7 +6,6 @@ import {
   ControlLabel,
   FormGroup
 } from "react-bootstrap";
-import { async } from "q";
 
 class ModalEdit extends Component {
   state = {
