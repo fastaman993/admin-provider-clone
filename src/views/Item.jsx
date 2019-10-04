@@ -114,7 +114,7 @@ class Category extends Component {
                   this.state.products.map((product, index) => {
                     return (
                       <>
-                        <Col lg={12} sm={4}>
+                        <Col lg={12}>
                           <Item
                             key={index}
                             idNya={product.id}

@@ -35,7 +35,7 @@ class Category extends Component {
       <div className="card card-stats">
         <div className="content">
           <Row>
-            <Col md={7}>
+            <Col md={8}>
               <div className="numbers">
                 <p>{this.props.name}</p>
               </div>

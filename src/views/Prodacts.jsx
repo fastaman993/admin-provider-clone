@@ -90,7 +90,6 @@ class Prodacts extends Component {
           <Row
             style={{
               marginTop: "10px",
-              marginLeft: "22%",
               justifyContent: "center",
               alignItems: "center"
             }}
@@ -98,7 +97,7 @@ class Prodacts extends Component {
             {this.props.category.map((cat, index) => {
               return (
                 <>
-                  <Col lg={8} sm={3}>
+                  <Col lg={8}>
                     <Category
                       name={cat.name}
                       id={cat.id}
