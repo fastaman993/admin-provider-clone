@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { NavItem, Nav } from "react-bootstrap";
-import { Link, Redirect } from "react-router-dom";
 import localStorage from "local-storage";
 
 class AdminNavbarLinks extends Component {

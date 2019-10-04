@@ -31,7 +31,7 @@ const dashboardRoutes = [
 
   {
     path: "/prodacts",
-    name: "Prodacts",
+    name: "Product",
     icon: "pe-7s-shopbag",
     component: Prodacts,
     layout: "/admin"
